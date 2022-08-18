@@ -1,6 +1,0 @@
-return {
-    MC_POST_SLOT_INIT = 0,
-    MC_POST_SLOT_UPDATE = 1,
-    MC_POST_SLOT_PRIZE = 2,
-    MC_PRE_SLOT_COLLISION = 3,
-}

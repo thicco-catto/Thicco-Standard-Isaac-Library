@@ -14,8 +14,13 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.VERSION = LOCAL_TSIL_VERSION
     TSIL.LOCAL_FOLDER = FolderName
 
+    --#region Custom Enums
+    TSIL.Enums = {}
+    TSIL.Enums.CustomCallbacks = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallbacks")
+    TSIL.Enums.InventoryType = require(TSIL.LOCAL_FOLDER .. ".Enums.InventoryType")
+    --#endregion
+
     --#region Custom Callbacks
-    TSIL.CUSTOM_CALLBACKS = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallbacksEnum")
     TSIL.AddCustomCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.AddCustomCallback")
     TSIL.RemoveCustomCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.RemoveCustomCallback")
 
@@ -29,15 +34,29 @@ function LOCAL_TSIL.Init(FolderName)
 
     --#region Table Utils
     TSIL.Utils.Tables = {}
+    TSIL.Utils.Tables.Copy = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Copy")
+    TSIL.Utils.Tables.Count = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Count")
     TSIL.Utils.Tables.Filter = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Filter")
-    --#endregion
+    TSIL.Utils.Tables.FindFirst = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.FindFirst")
+    TSIL.Utils.Tables.ForEach = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.ForEach")
     --#endregion
 
-    print("TSIL has been properly initialized!")
-end
+    --#region Random Utils
+    TSIL.Utils.Random = {}
+    TSIL.Utils.Random.GetRandomElementsFromTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromTable")
+    TSIL.Utils.Random.GetRandomIntegerInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomInt")
+    --#endregion
 
----@param das Entity
-local function asd(das)
+    --#region Players
+    TSIL.Players = {}
+    TSIL.Players.GetPlayers = require(TSIL.LOCAL_FOLDER .. ".Players.GetPlayers.GetPlayers")
+    TSIL.Players.GetPlayerIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerIndex")
+    TSIL.Players.GetPlayerByIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerByIndex")
+    TSIL.Players.GetSmeltedTrinketMultiplier = require(TSIL.LOCAL_FOLDER .. ".Players.SmeltedTrinketMultiplier")
+    TSIL.Players.GetPlayerInventory = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerInventory")
+    --#endregion
+
+    print("TSIL (" .. TSIL.VERSION .. ") has been properly initialized.")
 end
 
 return LOCAL_TSIL

@@ -5,7 +5,7 @@ function SlotUpdateCallback:OnFrameUpdate()
     local tableUtils = TSIL.Utils.Tables
 
     local SlotUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
-        return customCallback.callback == TSIL.CUSTOM_CALLBACKS.MC_POST_SLOT_UPDATE
+        return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_SLOT_UPDATE
     end)
 
     for _, slot in ipairs(Isaac.FindByType(EntityType.ENTITY_SLOT)) do
