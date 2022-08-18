@@ -4,7 +4,7 @@ local CustomCallbacksList = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.Custo
 function SlotPrizeCallback:OnFrameUpdate()
     local tableUtils = TSIL.Utils.Tables
 
-    local SlotUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (customCallback)
+    local SlotUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
         return customCallback.callback == TSIL.CUSTOM_CALLBACKS.MC_POST_SLOT_PRIZE
     end)
 

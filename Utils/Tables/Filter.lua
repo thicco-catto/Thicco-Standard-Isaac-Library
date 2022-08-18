@@ -1,9 +1,9 @@
 return function(toFilter, predicate)
     local filtered = {}
 
-    for _, value in pairs(toFilter) do
-        if predicate(value) then
-            table.insert(filtered, value)
+    for index, value in pairs(toFilter) do
+        if predicate(index, value) then
+            filtered[index] = value
         end
     end
 
