@@ -18,6 +18,7 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.Enums = {}
     TSIL.Enums.CustomCallbacks = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallbacks")
     TSIL.Enums.InventoryType = require(TSIL.LOCAL_FOLDER .. ".Enums.InventoryType")
+    TSIL.Enums.VariableResetTime = require(TSIL.LOCAL_FOLDER .. ".Enums.VariableResetTime")
     --#endregion
 
     --#region Custom Callbacks
@@ -27,6 +28,8 @@ function LOCAL_TSIL.Init(FolderName)
     require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.SlotCallbacks.SlotInitCallback")
     require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.SlotCallbacks.SlotUpdateCallback")
     require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.SlotCallbacks.SlotPrizeCallback")
+
+    require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.GridEntityCallbacks.GridUpdateCallback")
     --#endregion
 
     --#region Utils
@@ -39,12 +42,27 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.Utils.Tables.Filter = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Filter")
     TSIL.Utils.Tables.FindFirst = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.FindFirst")
     TSIL.Utils.Tables.ForEach = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.ForEach")
+    TSIL.Utils.Tables.IsInTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.IsInTable")
     --#endregion
 
     --#region Random Utils
     TSIL.Utils.Random = {}
     TSIL.Utils.Random.GetRandomElementsFromTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromTable")
     TSIL.Utils.Random.GetRandomIntegerInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomInt")
+    --#endregion
+
+    --#region Function Utils
+    TSIL.Utils.Functions = {}
+    TSIL.Utils.Functions.RunInFrames = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.Scheduler")
+    TSIL.Utils.Functions.RunNextRoom = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextRoom")
+    --#endregion
+
+    --#region SaveManager Utils
+    TSIL.Utils.SaveManager = {}
+    TSIL.Utils.SaveManager.AddVariableToReset = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.AddVariableToReset")
+    TSIL.Utils.SaveManager.GetVariabeToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.GetVariableToReset")
+    TSIL.Utils.SaveManager.SetVariableToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.SetVariableToReset")
+    require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.VariableResetter")
     --#endregion
 
     --#region Players
@@ -54,6 +72,14 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.Players.GetPlayerByIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerByIndex")
     TSIL.Players.GetSmeltedTrinketMultiplier = require(TSIL.LOCAL_FOLDER .. ".Players.SmeltedTrinketMultiplier")
     TSIL.Players.GetPlayerInventory = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerInventory")
+    TSIL.Players.DoesAnyPlayerHasItem = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasItem")
+    TSIL.Players.DoesAnyPlayerHasTrinket = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasTrinket")
+    TSIL.Players.IsActiveTaintedLazForm = require(TSIL.LOCAL_FOLDER .. ".Players.TaintedLaz.IsActiveBirthright")
+    --#endregion
+
+    --#region Grid Entities
+    TSIL.GridEntities = {}
+    TSIL.GridEntities.GetGridEntities = require(TSIL.LOCAL_FOLDER .. ".GridEntities.GetGridEntities")
     --#endregion
 
     print("TSIL (" .. TSIL.VERSION .. ") has been properly initialized.")

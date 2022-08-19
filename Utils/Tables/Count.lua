@@ -1,4 +1,8 @@
 return function(toCount, predicate)
+    if predicate == nil then
+        predicate = function() return true end
+   end
+
     local filtered = TSIL.Utils.Tables.Filter(toCount, predicate)
 
     local count = 0

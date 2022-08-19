@@ -1,5 +1,9 @@
 return function(toFind, predicate)
-    local filtered = TSIL.Utils.Tables.Filter(toFind, predicate)
+    for index, value in pairs(toFind) do
+        if predicate(index, value) then
+            return value
+        end
+    end
 
-    return filtered[1]
+    return nil
 end

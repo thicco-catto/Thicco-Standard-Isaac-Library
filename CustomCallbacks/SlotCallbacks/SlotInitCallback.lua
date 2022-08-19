@@ -1,7 +1,6 @@
-local SlotInitCallback = {}
 local CustomCallbacksList = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.CustomCallbacksList")
 
-function SlotInitCallback:OnFrameUpdate()
+local function OnFrameUpdate()
     local tableUtils = TSIL.Utils.Tables
 
     local SlotUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
@@ -21,4 +20,4 @@ function SlotInitCallback:OnFrameUpdate()
     end
 end
 
-TSIL.MOD:AddCallback(ModCallbacks.MC_POST_UPDATE, SlotInitCallback.OnFrameUpdate)
+TSIL.MOD:AddCallback(ModCallbacks.MC_POST_UPDATE, OnFrameUpdate)

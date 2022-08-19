@@ -1,4 +1,4 @@
-return function (toChoose, rngOrSeed, numberOfElements)
+return function (rngOrSeed, toChoose, numberOfElements)
     local rng
 
     if type(rngOrSeed) == "number" then

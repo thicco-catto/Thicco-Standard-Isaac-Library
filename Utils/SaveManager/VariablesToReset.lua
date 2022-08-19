@@ -1,0 +1,3 @@
+local VariablesToReset = {}
+
+return VariablesToReset
