@@ -1,5 +1,5 @@
 local LOCAL_TSIL = {}
-local LOCAL_TSIL_VERSION = 1.0
+local LOCAL_TSIL_VERSION = 0.1
 
 function LOCAL_TSIL.Init(FolderName)
     if not TSIL then
@@ -15,13 +15,14 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.LOCAL_FOLDER = FolderName
 
     --#region Custom Enums
-    TSIL.Enums = {}
-    --For TSIL itself
-    TSIL.Enums.CustomCallbacks = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallbacks")
-    TSIL.Enums.InventoryType = require(TSIL.LOCAL_FOLDER .. ".Enums.InventoryType")
-    TSIL.Enums.VariableResetTime = require(TSIL.LOCAL_FOLDER .. ".Enums.VariableResetTime")
-    --For ingame stuff
-    TSIL.Enums.SlotVariant = require(TSIL.LOCAL_FOLDER .. ".Enums.SlotVariant")
+    TSIL.Enums = {
+        --For TSIL itself
+        CustomCallbacks = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallbacks"),
+        InventoryType = require(TSIL.LOCAL_FOLDER .. ".Enums.InventoryType"),
+        VariableResetTime = require(TSIL.LOCAL_FOLDER .. ".Enums.VariableResetTime"),
+        --For ingame stuff
+        SlotVariant = require(TSIL.LOCAL_FOLDER .. ".Enums.SlotVariant"),
+    }
     --#endregion
 
     --#region Custom Callbacks
@@ -36,66 +37,69 @@ function LOCAL_TSIL.Init(FolderName)
     --#endregion
 
     --#region Utils
-    TSIL.Utils = {}
+    TSIL.Utils = {
+        Tables = {
+            Copy = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Copy"),
+            Count = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Count"),
+            Filter = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Filter"),
+            FindFirst = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.FindFirst"),
+            ForEach = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.ForEach"),
+            IsInTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.IsInTable"),
+        },
 
-    --#region Table Utils
-    TSIL.Utils.Tables = {}
-    TSIL.Utils.Tables.Copy = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Copy")
-    TSIL.Utils.Tables.Count = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Count")
-    TSIL.Utils.Tables.Filter = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Filter")
-    TSIL.Utils.Tables.FindFirst = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.FindFirst")
-    TSIL.Utils.Tables.ForEach = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.ForEach")
-    TSIL.Utils.Tables.IsInTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.IsInTable")
-    --#endregion
+        Random = {
+            GetRandomElementsFromTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromTable"),
+            GetRandomIntegerInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomInt"),
+            GetRandomElementFromWeightedList = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromWeighted"),
+        },
 
-    --#region Random Utils
-    TSIL.Utils.Random = {}
-    TSIL.Utils.Random.GetRandomElementsFromTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromTable")
-    TSIL.Utils.Random.GetRandomIntegerInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomInt")
-    TSIL.Utils.Random.GetRandomElementFromWeightedList = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromWeighted")
-    --#endregion
+        Functions = {
+            RunInFrames = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.Scheduler"),
+            RunNextRoom = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextRoom"),
+        },
 
-    --#region Function Utils
-    TSIL.Utils.Functions = {}
-    TSIL.Utils.Functions.RunInFrames = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.Scheduler")
-    TSIL.Utils.Functions.RunNextRoom = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextRoom")
-    --#endregion
+        Flags = {
+            AddFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.AddFlags"),
+            HasFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.HasFlags"),
+            RemoveFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.RemoveFlags"),
+        },
 
-    --#region Flags Utils
-    TSIL.Utils.Flags = {}
-    TSIL.Utils.Flags.AddFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.AddFlags")
-    TSIL.Utils.Flags.HasFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.HasFlags")
-    TSIL.Utils.Flags.RemoveFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.RemoveFlags")
-    --#endregion
+        SaveManager = {
+            AddVariableToReset = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.AddVariableToReset"),
+            GetVariabeToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.GetVariableToReset"),
+            SetVariableToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.SetVariableToReset"),
+        },
+    }
 
-    --#region SaveManager Utils
-    TSIL.Utils.SaveManager = {}
-    TSIL.Utils.SaveManager.AddVariableToReset = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.AddVariableToReset")
-    TSIL.Utils.SaveManager.GetVariabeToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.GetVariableToReset")
-    TSIL.Utils.SaveManager.SetVariableToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.SetVariableToReset")
+    --This takes care of resetting all the variables in the save manager
     require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.VariableResetter")
+
     --#endregion
 
-    --#region
-    TSIL.Collectibles = {}
-    TSIL.Collectibles.GetCollectibles = require(TSIL.LOCAL_FOLDER .. ".Collectibles.GetCollectibles")
+    --#region Collectibles
+    TSIL.Collectibles = {
+        GetCollectibles = require(TSIL.LOCAL_FOLDER .. ".Collectibles.GetCollectibles"),
+        GetCollectiblesByQuality = require(TSIL.LOCAL_FOLDER .. ".Collectibles.GetCollectiblesByQuality")
+    }
     --#endregion
 
     --#region Players
-    TSIL.Players = {}
-    TSIL.Players.GetPlayers = require(TSIL.LOCAL_FOLDER .. ".Players.GetPlayers.GetPlayers")
-    TSIL.Players.GetPlayerIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerIndex")
-    TSIL.Players.GetPlayerByIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerByIndex")
-    TSIL.Players.GetSmeltedTrinketMultiplier = require(TSIL.LOCAL_FOLDER .. ".Players.SmeltedTrinketMultiplier")
-    TSIL.Players.GetPlayerInventory = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerInventory")
-    TSIL.Players.DoesAnyPlayerHasItem = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasItem")
-    TSIL.Players.DoesAnyPlayerHasTrinket = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasTrinket")
-    TSIL.Players.IsActiveTaintedLazForm = require(TSIL.LOCAL_FOLDER .. ".Players.TaintedLaz.IsActiveBirthright")
+    TSIL.Players = {
+        GetPlayers = require(TSIL.LOCAL_FOLDER .. ".Players.GetPlayers.GetPlayers"),
+        GetPlayerIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerIndex"),
+        GetPlayerByIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerByIndex"),
+        GetSmeltedTrinketMultiplier = require(TSIL.LOCAL_FOLDER .. ".Players.SmeltedTrinketMultiplier"),
+        GetPlayerInventory = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerInventory"),
+        DoesAnyPlayerHasItem = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasItem"),
+        DoesAnyPlayerHasTrinket = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasTrinket"),
+        IsActiveTaintedLazForm = require(TSIL.LOCAL_FOLDER .. ".Players.TaintedLaz.IsActiveBirthright"),
+    }
     --#endregion
 
     --#region Grid Entities
-    TSIL.GridEntities = {}
-    TSIL.GridEntities.GetGridEntities = require(TSIL.LOCAL_FOLDER .. ".GridEntities.GetGridEntities")
+    TSIL.GridEntities = {
+        GetGridEntities = require(TSIL.LOCAL_FOLDER .. ".GridEntities.GetGridEntities"),
+    }
     --#endregion
 
     print("TSIL (" .. TSIL.VERSION .. ") has been properly initialized.")
