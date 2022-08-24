@@ -76,6 +76,11 @@ function LOCAL_TSIL.Init(FolderName)
     require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.VariableResetter")
     --#endregion
 
+    --#region
+    TSIL.Collectibles = {}
+    TSIL.Collectibles.GetCollectibles = require(TSIL.LOCAL_FOLDER .. ".Collectibles.GetCollectibles")
+    --#endregion
+
     --#region Players
     TSIL.Players = {}
     TSIL.Players.GetPlayers = require(TSIL.LOCAL_FOLDER .. ".Players.GetPlayers.GetPlayers")
