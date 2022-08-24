@@ -61,6 +61,12 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.Utils.Functions.RunNextRoom = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextRoom")
     --#endregion
 
+    --#region Flags Utils
+    TSIL.Utils.Flags = {}
+    TSIL.Utils.Flags.AddFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.AddFlags")
+    TSIL.Utils.Flags.HasFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.HasFlags")
+    --#endregion
+
     --#region SaveManager Utils
     TSIL.Utils.SaveManager = {}
     TSIL.Utils.SaveManager.AddVariableToReset = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.AddVariableToReset")
