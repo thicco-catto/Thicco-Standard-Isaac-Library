@@ -65,6 +65,7 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.Utils.Flags = {}
     TSIL.Utils.Flags.AddFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.AddFlags")
     TSIL.Utils.Flags.HasFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.HasFlags")
+    TSIL.Utils.Flags.RemoveFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.RemoveFlags")
     --#endregion
 
     --#region SaveManager Utils
