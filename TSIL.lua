@@ -16,9 +16,12 @@ function LOCAL_TSIL.Init(FolderName)
 
     --#region Custom Enums
     TSIL.Enums = {}
+    --For TSIL itself
     TSIL.Enums.CustomCallbacks = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallbacks")
     TSIL.Enums.InventoryType = require(TSIL.LOCAL_FOLDER .. ".Enums.InventoryType")
     TSIL.Enums.VariableResetTime = require(TSIL.LOCAL_FOLDER .. ".Enums.VariableResetTime")
+    --For ingame stuff
+    TSIL.Enums.SlotVariant = require(TSIL.LOCAL_FOLDER .. ".Enums.SlotVariant")
     --#endregion
 
     --#region Custom Callbacks
@@ -49,6 +52,7 @@ function LOCAL_TSIL.Init(FolderName)
     TSIL.Utils.Random = {}
     TSIL.Utils.Random.GetRandomElementsFromTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromTable")
     TSIL.Utils.Random.GetRandomIntegerInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomInt")
+    TSIL.Utils.Random.GetRandomElementFromWeightedList = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromWeighted")
     --#endregion
 
     --#region Function Utils
