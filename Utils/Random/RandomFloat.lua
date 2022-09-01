@@ -1,4 +1,4 @@
----Returns a random integer between 2 others.
+---Returns a random float between 2 others.
 ---Inclusive in the low end and exclusive in the high end.
 ---@param rngOrSeed RNG | integer
 ---@param max integer
@@ -20,7 +20,8 @@ return function (rngOrSeed, max, min)
 
     local maxForRNG = max - min
 
-    local chosenNumber = rng:RandomInt(maxForRNG)
+    local chosenNumber = rng:RandomFloat()
+    chosenNumber = chosenNumber * maxForRNG
 
     return chosenNumber + min
 end

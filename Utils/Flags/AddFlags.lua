@@ -1,3 +1,7 @@
+---Adds the given flag to another one.
+---@param flags integer
+---@param ... integer
+---@return integer
 return function (flags, ...)
     local flagsToAdd = {...}
 

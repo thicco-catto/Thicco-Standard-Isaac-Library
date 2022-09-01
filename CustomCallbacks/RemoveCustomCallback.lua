@@ -1,5 +1,8 @@
-local CustomCallbacksList = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.CustomCallbacksList")
+local CustomCallbacksList = TSIL.VERSION_PERSISTENT_DATA.CustomCallbacksList
 
+---@param mod table
+---@param callback CustomCallback
+---@param funct function
 return function(mod, callback, funct)
     for index, customCallback in ipairs(CustomCallbacksList) do
         if mod == customCallback.mod and callback == customCallback.callback and funct == customCallback.funct then

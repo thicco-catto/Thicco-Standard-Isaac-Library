@@ -1,3 +1,6 @@
+---Returns true if at least one player has the given item.
+---@param collectibleId CollectibleType
+---@return boolean
 return function (collectibleId)
     local players = TSIL.Players.GetPlayers()
 

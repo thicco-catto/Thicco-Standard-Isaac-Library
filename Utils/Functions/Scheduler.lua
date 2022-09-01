@@ -13,8 +13,13 @@ local function OnFrameUpdate()
         return scheduledFunction.frames > 0
     end)
 end
-TSIL.MOD:AddCallback(ModCallbacks.MC_POST_UPDATE, OnFrameUpdate)
+table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_UPDATE, funct = OnFrameUpdate})
 
-return function (funct, params, frames)
-    table.insert(ScheduledFunctions, {funct = funct, params = params, frames = frames})
+---Runs a function in a given number of frames.
+---@param funct function
+---@param frames integer
+---@param ... any
+return function (funct, frames, ...)
+    local args = {...}
+    table.insert(ScheduledFunctions, {funct = funct, frames = frames, params = args})
 end

@@ -1,3 +1,6 @@
+---Returns a list with all item ids currently loaded.
+---Use only inside a callback or not all modded items may be loaded.
+---@return CollectibleType[]
 return function ()
     local collectibles = {}
 

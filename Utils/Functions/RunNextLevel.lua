@@ -1,15 +1,15 @@
 local FunctionsToRun = {}
 
-local function OnNewRoom()
+local function OnNewLevel()
     TSIL.Utils.Tables.ForEach(FunctionsToRun, function (_, functionToRun)
         functionToRun.funct(table.unpack(functionToRun.params))
     end)
 
     FunctionsToRun = {}
 end
-table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_NEW_ROOM, funct = OnNewRoom})
+table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_NEW_LEVEL, funct = OnNewLevel})
 
----Runs a given function on the next room
+---Runs a given function on the next level
 ---@param funct function
 ---@param ... any
 return function (funct, ...)

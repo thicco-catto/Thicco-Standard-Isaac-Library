@@ -1,3 +1,6 @@
+---Returns true if at least one player has the given trinket.
+---@param trinketId TrinketType
+---@return boolean
 return function (trinketId)
     local players = TSIL.Players.GetPlayers()
 

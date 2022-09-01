@@ -1,3 +1,6 @@
+---Returns a list of all players.
+---@param ignoreCoopBabies? boolean @default: true
+---@return EntityPlayer[]
 return function (ignoreCoopBabies)
     if ignoreCoopBabies == nil then
         ignoreCoopBabies = true
@@ -8,7 +11,9 @@ return function (ignoreCoopBabies)
     for i = 0, Game():GetNumPlayers() - 1, 1 do
         local player = Game():GetPlayer(i)
 
-        table.insert(players, player)
+        if not ignoreCoopBabies or player.Variant ~= 1 then
+            table.insert(players, player)
+        end
     end
 
     return players

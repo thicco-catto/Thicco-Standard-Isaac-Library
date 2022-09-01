@@ -1,7 +1,8 @@
-local PlayerGulpedTrinketAdded = {}
-local CustomCallbacksList = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.CustomCallbacksList")
+local CustomCallbacksList = TSIL.VERSION_PERSISTENT_DATA.CustomCallbacksList
 
-function PlayerGulpedTrinketAdded.ExecuteCallback(player, trinketId)
+---@param player EntityPlayer
+---@param trinketId TrinketType
+return function (player, trinketId)
     local tableUtils = TSIL.Utils.Tables
 
     local PlayerGulpedTrinketAddedCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
@@ -14,5 +15,3 @@ function PlayerGulpedTrinketAdded.ExecuteCallback(player, trinketId)
         customCallback.funct(customCallback.mod, player, trinketId)
     end)
 end
-
-return PlayerGulpedTrinketAdded

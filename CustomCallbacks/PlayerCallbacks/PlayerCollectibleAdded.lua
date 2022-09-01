@@ -1,7 +1,8 @@
-local PlayerCollectibleAdded = {}
-local CustomCallbacksList = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.CustomCallbacksList")
+local CustomCallbacksList = TSIL.VERSION_PERSISTENT_DATA.CustomCallbacksList
 
-function PlayerCollectibleAdded.ExecuteCallback(player, collectibleId)
+---@param player EntityPlayer
+---@param collectibleId CollectibleType
+return function (player, collectibleId)
     local tableUtils = TSIL.Utils.Tables
 
     local PlayerCollectibleAddedCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
@@ -14,5 +15,3 @@ function PlayerCollectibleAdded.ExecuteCallback(player, collectibleId)
         customCallback.funct(customCallback.mod, player, collectibleId)
     end)
 end
-
-return PlayerCollectibleAdded

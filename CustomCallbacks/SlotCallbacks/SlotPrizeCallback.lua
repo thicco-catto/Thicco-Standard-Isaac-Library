@@ -1,26 +1,24 @@
-local SlotPrizeCallback = {}
-local CustomCallbacksList = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.CustomCallbacksList")
+local CustomCallbacksList = TSIL.VERSION_PERSISTENT_DATA.CustomCallbacksList
 
-function SlotPrizeCallback:OnFrameUpdate()
+function OnSlotUpdate(_, slot)
+    local slotSpr = slot:GetSprite()
+
+    if not slotSpr:IsEventTriggered("Prize") and not slotSpr:IsEventTriggered("Disappear") then return end
+
     local tableUtils = TSIL.Utils.Tables
 
-    local SlotUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
+    local SlotPrizeCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
         return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_SLOT_PRIZE
     end)
 
-    for _, slot in ipairs(Isaac.FindByType(EntityType.ENTITY_SLOT)) do
-        local slotSpr = slot:GetSprite()
+    local filteredCallbacks = tableUtils.Filter(SlotPrizeCallbacks, function(_, customCallback)
+        local slotVariant = customCallback.params[1]
+        return not slotVariant or slot.Variant == slotVariant
+    end)
 
-        if slotSpr:IsEventTriggered("Prize") or slotSpr:IsEventTriggered("Disappear") then
-            for _, customCallback in ipairs(SlotUpdateCallbacks) do
-                local slotVariant = customCallback.params[1]
-
-                if not slotVariant or slot.Variant == slotVariant then
-                    customCallback.funct(customCallback.mod, slot, slotSpr:IsEventTriggered("Disappear"))
-                end
-            end
-        end
-    end
+    tableUtils.ForEach(filteredCallbacks, function(_, customCallback)
+        customCallback.funct(customCallback.mod, slot, slotSpr:IsEventTriggered("Disappear"))
+    end)
 end
 
-TSIL.MOD:AddCallback(ModCallbacks.MC_POST_UPDATE, SlotPrizeCallback.OnFrameUpdate)
+table.insert(TSIL.CUSTOM_CALLBACKS, {callback = TSIL.Enums.CustomCallback.MC_POST_SLOT_UPDATE, funct = OnSlotUpdate})

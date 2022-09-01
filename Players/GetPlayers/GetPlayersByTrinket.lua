@@ -1,3 +1,6 @@
+---Returns all the players that have a certain trinket
+---@param trinketId TrinketType
+---@return EntityPlayer[]
 return function (trinketId)
     local players = TSIL.Players.GetPlayers()
 

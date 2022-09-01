@@ -1,3 +1,7 @@
+---Removes the given flags from another one.
+---@param flags integer
+---@param ... integer
+---@return integer
 return function (flags, ...)
     local flagsToRemove = {...}
 

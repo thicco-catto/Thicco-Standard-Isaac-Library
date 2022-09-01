@@ -1,23 +1,21 @@
-local CustomCallbacksList = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.CustomCallbacksList")
+local CustomCallbacksList = TSIL.VERSION_PERSISTENT_DATA.CustomCallbacksList
 
-local function OnFrameUpdate()
+local function OnSlotUpdate(_, slot)
+    if slot.FrameCount ~= 1 then return end
+
     local tableUtils = TSIL.Utils.Tables
 
-    local SlotUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
+    local SlotInitCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
         return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_SLOT_INIT
     end)
 
-    for _, slot in ipairs(Isaac.FindByType(EntityType.ENTITY_SLOT)) do
-        if slot.FrameCount == 1 then
-            for _, customCallback in ipairs(SlotUpdateCallbacks) do
-                local slotVariant = customCallback.params[1]
+    local filteredCallbacks = tableUtils.Filter(SlotInitCallbacks, function(_, customCallback)
+        local slotVariant = customCallback.params[1]
+        return not slotVariant or slot.Variant == slotVariant
+    end)
 
-                if not slotVariant or slot.Variant == slotVariant then
-                    customCallback.funct(customCallback.mod, slot)
-                end
-            end
-        end
-    end
+    tableUtils.ForEach(filteredCallbacks, function(_, customCallback)
+        customCallback.funct(customCallback.mod, slot)
+    end)
 end
-
-TSIL.MOD:AddCallback(ModCallbacks.MC_POST_UPDATE, OnFrameUpdate)
+table.insert(TSIL.CUSTOM_CALLBACKS, {callback = TSIL.Enums.CustomCallback.MC_POST_SLOT_UPDATE, funct = OnSlotUpdate})

@@ -1,3 +1,8 @@
+---Returns the number of trinkets a player has smelted.
+---Won't count the trinkets they're currently holding.
+---@param player EntityPlayer
+---@param trinket TrinketType
+---@return integer
 return function(player, trinket)
     local totalMultiplier = player:GetTrinketMultiplier(trinket)
     local playerHasMomsBox = player:HasCollectible(CollectibleType.COLLECTIBLE_MOMS_BOX)

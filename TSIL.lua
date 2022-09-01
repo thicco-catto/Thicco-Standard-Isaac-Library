@@ -2,22 +2,43 @@ local LOCAL_TSIL = {}
 local LOCAL_TSIL_VERSION = 0.1
 
 function LOCAL_TSIL.Init(FolderName)
+    local isOverwritting = false
+
     if not TSIL then
         --If TSIL hasnt been initialized yet, initialize it
         TSIL = {}
     elseif TSIL.VERSION >= LOCAL_TSIL_VERSION then
         --If theres already an instance with a higher version, we don't need to overwrite it
+        --TODO: Change the >= to > to avoid overwritting same version (there for testing)
         return
+    else
+        --There's an older TSIL version, overwrite it
+        for _, TSILcallback in ipairs(TSIL.CALLBACKS) do
+            TSIL.MOD:RemoveCallback(TSILcallback.callback, TSILcallback.funct)
+        end
+
+        for _, TSILcallback in ipairs(TSIL.CUSTOM_CALLBACKS) do
+            TSIL.RemoveCustomCallback(TSILcallback.callback, TSILcallback.funct)
+        end
+
+        isOverwritting = true
     end
 
     TSIL.MOD = RegisterMod("TSILMOD", 1)
     TSIL.VERSION = LOCAL_TSIL_VERSION
     TSIL.LOCAL_FOLDER = FolderName
 
+    TSIL.CALLBACKS = {}
+    TSIL.CUSTOM_CALLBACKS = {}
+
+    if not isOverwritting then
+        TSIL.VERSION_PERSISTENT_DATA = {}
+    end
+
     --#region Custom Enums
     TSIL.Enums = {
         --For TSIL itself
-        CustomCallbacks = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallbacks"),
+        CustomCallback = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallback"),
         InventoryType = require(TSIL.LOCAL_FOLDER .. ".Enums.InventoryType"),
         VariableResetTime = require(TSIL.LOCAL_FOLDER .. ".Enums.VariableResetTime"),
         --For ingame stuff
@@ -50,12 +71,14 @@ function LOCAL_TSIL.Init(FolderName)
         Random = {
             GetRandomElementsFromTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromTable"),
             GetRandomIntegerInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomInt"),
+            GetRandomFloatInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFloat"),
             GetRandomElementFromWeightedList = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromWeighted"),
         },
 
         Functions = {
             RunInFrames = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.Scheduler"),
             RunNextRoom = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextRoom"),
+            RunNextLevel = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextLevel")
         },
 
         Flags = {

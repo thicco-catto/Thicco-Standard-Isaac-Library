@@ -1,3 +1,10 @@
+---Returns a random value from a weighted list of possibilities.
+---Each value must be given as a pair of chance and value.
+---
+---`{chance = x, value = y}`
+---@param rngOrSeed RNG | integer
+---@param ... {chance : integer, value : any}
+---@return any
 return function (rngOrSeed, ...)
     local rng
 

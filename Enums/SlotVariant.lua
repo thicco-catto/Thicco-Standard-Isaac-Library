@@ -1,3 +1,4 @@
+---@enum SlotVariant
 return {
     SLOT_MACHINE = 1,
     SLOT_BLOOD_DONATION_MACHINE = 2,

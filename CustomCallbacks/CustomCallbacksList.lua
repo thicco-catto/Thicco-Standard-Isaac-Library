@@ -1,3 +1,0 @@
-local CustomCallbacksList = {}
-
-return CustomCallbacksList

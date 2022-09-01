@@ -1,3 +1,7 @@
+---Returns a list of all items of a certain quality.
+---Use only inside a callback or not all modded items may be loaded.
+---@param quality integer 0|1|2|3|4
+---@return CollectibleType[]
 return function (quality)
     local collectibles = TSIL.Collectibles.GetCollectibles()
 

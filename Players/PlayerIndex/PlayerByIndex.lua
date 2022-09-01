@@ -1,3 +1,6 @@
+---Returns a player given its index.
+---@param playerIndex integer
+---@return EntityPlayer | nil
 return function (playerIndex)
     local players = TSIL.Players.GetPlayers()
 

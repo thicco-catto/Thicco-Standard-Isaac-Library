@@ -1,3 +1,8 @@
+---Returns n randomly selected elements from a table.
+---@param rngOrSeed RNG | integer
+---@param toChoose table
+---@param numberOfElements? integer @default: 1
+---@return table
 return function (rngOrSeed, toChoose, numberOfElements)
     local rng
 

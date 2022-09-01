@@ -1,9 +1,11 @@
-local PlayerInventories = {}
+TSIL.Utils.SaveManager.AddVariableToReset(TSIL.MOD, "PlayerInventories", {}, TSIL.Enums.VariableResetTime.RESET_RUN)
+local PlayerInventories = TSIL.Utils.SaveManager.GetVariabeToResetValue(TSIL.MOD, "PlayerInventories")
 
 local PlayerCollectibleAddedCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.PlayerCallbacks.PlayerCollectibleAdded")
 local PlayerCollectibleRemovedCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.PlayerCallbacks.PlayerCollectibleRemoved")
 local PlayerGulpedTrinketAddedCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.PlayerCallbacks.PlayerGulpedTrinketAdded")
 local PlayerGulpedTrinketRemovedCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.PlayerCallbacks.PlayerGulpedTrinketRemoved")
+
 
 local function CheckCollectedItems(player, playerState)
     local itemConfig = Isaac.GetItemConfig()
@@ -26,7 +28,7 @@ local function CheckCollectedItems(player, playerState)
                     table.insert(playerState.InventoryOrdered, { type = TSIL.Enums.InventoryType.INVENTORY_COLLECTIBLE, id = itemId })
                 end
 
-                PlayerCollectibleAddedCallback.ExecuteCallback(player, itemId)
+                PlayerCollectibleAddedCallback(player, itemId)
             elseif actualCollectibleNum < pastCollectibleNum then
                 --If the actual num is smaller than what we had, player has lost an item
                 playerState.CollectedItems[itemId] = actualCollectibleNum
@@ -41,7 +43,7 @@ local function CheckCollectedItems(player, playerState)
                     end
                 end
 
-                PlayerCollectibleRemovedCallback.ExecuteCallback(player, itemId)
+                PlayerCollectibleRemovedCallback(player, itemId)
             end
         end
     end
@@ -70,7 +72,7 @@ local function CheckGulpedTrinkets(player, playerState)
                     table.insert(playerState.InventoryOrdered, { type = TSIL.Enums.InventoryType.INVENTORY_TRINKET, id = trinketId })
                 end
 
-                PlayerGulpedTrinketAddedCallback.ExecuteCallback(player, trinketId)
+                PlayerGulpedTrinketAddedCallback(player, trinketId)
             elseif actualGulpedNum < pastGulpedNum then
                 --If the actual num is smaller than what we had, player has lost an item
                 playerState.GulpedTrinkets[trinketId] = actualGulpedNum
@@ -87,7 +89,7 @@ local function CheckGulpedTrinkets(player, playerState)
                     end
                 end
 
-                PlayerGulpedTrinketRemovedCallback.ExecuteCallback(player, trinketId)
+                PlayerGulpedTrinketRemovedCallback(player, trinketId)
             end
         end
     end
@@ -120,6 +122,11 @@ end
 
 TSIL.MOD:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, OnPeffectUpdate)
 
+---Returns a list of all the items/gulped trinkets (things that appear on the extra HUD) ordered by the time they were collected.
+---This method is not perfect and will fail if the player rerolls all of their items or a mod gives several items in the same frame.
+---@param player EntityPlayer
+---@param inventoryTypeFilter? InventoryType
+---@return table
 return function(player, inventoryTypeFilter)
     local playerIndex = TSIL.Players.GetPlayerIndex(player)
 

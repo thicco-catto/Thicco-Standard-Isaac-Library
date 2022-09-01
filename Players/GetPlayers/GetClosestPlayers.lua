@@ -1,3 +1,8 @@
+---Returns the n closest players to a certain point.
+---The players are ordered by their distance.
+---@param center Vector
+---@param numberOfPlayers? integer @default : 1
+---@return EntityPlayer[]
 return function (center, numberOfPlayers)
     if numberOfPlayers == nil then
         numberOfPlayers = 1
