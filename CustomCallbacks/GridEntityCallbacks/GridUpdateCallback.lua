@@ -6,7 +6,7 @@ local function OnFrameUpdate()
     local tableUtils = TSIL.Utils.Tables
 
     local GridUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
-        return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_GRID_ENTITY_UPDATE
+        return customCallback.callback == TSIL.Enums.CustomCallback.MC_POST_GRID_ENTITY_UPDATE
     end)
 
     for i = 0, room:GetGridSize() - 1, 1 do
@@ -14,9 +14,9 @@ local function OnFrameUpdate()
 
         if gridEntity then
             tableUtils.ForEach(GridUpdateCallbacks, function (_, customCallback)
-                local targetGridEntityVariant = customCallback.params[1]
+                local targetGridEntityType = customCallback.params[1]
 
-                if targetGridEntityVariant == nil or targetGridEntityVariant == gridEntity:GetVariant() then
+                if targetGridEntityType == nil or targetGridEntityType == gridEntity:GetType() then
                     customCallback.funct(customCallback.mod, gridEntity)
                 end
             end)
@@ -24,4 +24,5 @@ local function OnFrameUpdate()
     end
 end
 
-table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_UPDATE, funct = OnFrameUpdate})
+TSIL.CALLBACKS["GRID_UPDATE_CALLBACK_POST_UPDATE"] =
+{callback = ModCallbacks.MC_POST_UPDATE, funct = OnFrameUpdate}

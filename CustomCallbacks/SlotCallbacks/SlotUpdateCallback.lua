@@ -4,7 +4,7 @@ local function OnFrameUpdate()
     local tableUtils = TSIL.Utils.Tables
 
     local SlotUpdateCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
-        return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_SLOT_UPDATE
+        return customCallback.callback == TSIL.Enums.CustomCallback.MC_POST_SLOT_UPDATE
     end)
 
     local slots = Isaac.FindByType(EntityType.ENTITY_SLOT)
@@ -20,4 +20,5 @@ local function OnFrameUpdate()
         end)
     end)
 end
-table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_UPDATE, funct = OnFrameUpdate})
+TSIL.CALLBACKS["SLOT_UPDATE_CALLBACK_POST_UPDATE"] =
+{callback = ModCallbacks.MC_POST_UPDATE, funct = OnFrameUpdate}

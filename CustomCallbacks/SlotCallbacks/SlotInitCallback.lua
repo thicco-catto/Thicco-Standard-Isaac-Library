@@ -6,7 +6,7 @@ local function OnSlotUpdate(_, slot)
     local tableUtils = TSIL.Utils.Tables
 
     local SlotInitCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
-        return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_SLOT_INIT
+        return customCallback.callback == TSIL.Enums.CustomCallback.MC_POST_SLOT_INIT
     end)
 
     local filteredCallbacks = tableUtils.Filter(SlotInitCallbacks, function(_, customCallback)
@@ -18,4 +18,5 @@ local function OnSlotUpdate(_, slot)
         customCallback.funct(customCallback.mod, slot)
     end)
 end
-table.insert(TSIL.CUSTOM_CALLBACKS, {callback = TSIL.Enums.CustomCallback.MC_POST_SLOT_UPDATE, funct = OnSlotUpdate})
+TSIL.CUSTOM_CALLBACKS["SLOT_INIT_CALLBACK_SLOT_UPDATE"] = 
+{callback = TSIL.Enums.CustomCallback.MC_POST_SLOT_UPDATE, funct = OnSlotUpdate}

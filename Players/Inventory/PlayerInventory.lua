@@ -121,8 +121,8 @@ local function OnPeffectUpdate(_, player)
 
     CheckGulpedTrinkets(player, playerState)
 end
-
-TSIL.MOD:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, OnPeffectUpdate)
+TSIL.CALLBACKS["PLAYER_INVENTORY_PEFFECT_UPDATE"] =
+{callback = ModCallbacks.MC_POST_PEFFECT_UPDATE, funct = OnPeffectUpdate}
 
 ---Returns a list of all the items/gulped trinkets (things that appear on the extra HUD) ordered by the time they were collected.
 ---This method is not perfect and will fail if the player rerolls all of their items or a mod gives several items in the same frame.

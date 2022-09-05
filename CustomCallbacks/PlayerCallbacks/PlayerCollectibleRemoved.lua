@@ -7,7 +7,7 @@ return function (player, collectibleId)
 
     local PlayerCollectibleRemovedCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
         local callbackCollectible = customCallback.params[1]
-        return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_PLAYER_COLLECTIBLE_REMOVED and
+        return customCallback.callback == TSIL.Enums.CustomCallback.MC_POST_PLAYER_COLLECTIBLE_REMOVED and
         (callbackCollectible == nil or callbackCollectible == collectibleId)
     end)
 

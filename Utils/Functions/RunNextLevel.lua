@@ -7,7 +7,8 @@ local function OnNewLevel()
 
     FunctionsToRun = {}
 end
-table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_NEW_LEVEL, funct = OnNewLevel})
+TSIL.CALLBACKS["RUN_NEXT_LEVEL_POST_NEW_LEVEL"] =
+{callback = ModCallbacks.MC_POST_NEW_LEVEL, funct = OnNewLevel}
 
 ---Runs a given function on the next level
 ---@param funct function

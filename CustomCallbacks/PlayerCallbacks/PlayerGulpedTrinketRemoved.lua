@@ -7,7 +7,7 @@ return function (player, trinketId)
 
     local PlayerGulpedTrinketRemovedCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
         local callbackCollectible = customCallback.params[1]
-        return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_PLAYER_GULPED_TRINKET_REMOVED and
+        return customCallback.callback == TSIL.Enums.CustomCallback.MC_POST_PLAYER_GULPED_TRINKET_REMOVED and
         (callbackCollectible == nil or callbackCollectible == trinketId)
     end)
 

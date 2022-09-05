@@ -8,7 +8,7 @@ function OnSlotUpdate(_, slot)
     local tableUtils = TSIL.Utils.Tables
 
     local SlotPrizeCallbacks = tableUtils.Filter(CustomCallbacksList, function (_, customCallback)
-        return customCallback.callback == TSIL.Enums.CustomCallbacks.MC_POST_SLOT_PRIZE
+        return customCallback.callback == TSIL.Enums.CustomCallback.MC_POST_SLOT_PRIZE
     end)
 
     local filteredCallbacks = tableUtils.Filter(SlotPrizeCallbacks, function(_, customCallback)
@@ -20,5 +20,5 @@ function OnSlotUpdate(_, slot)
         customCallback.funct(customCallback.mod, slot, slotSpr:IsEventTriggered("Disappear"))
     end)
 end
-
-table.insert(TSIL.CUSTOM_CALLBACKS, {callback = TSIL.Enums.CustomCallback.MC_POST_SLOT_UPDATE, funct = OnSlotUpdate})
+TSIL.CUSTOM_CALLBACKS["SLOT_PRIZE_CALLBACK_SLOT_UPDATE"] =
+{callback = TSIL.Enums.CustomCallback.MC_POST_SLOT_UPDATE, funct = OnSlotUpdate}

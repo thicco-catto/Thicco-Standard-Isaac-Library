@@ -7,7 +7,8 @@ local function OnNewRoom()
 
     FunctionsToRun = {}
 end
-table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_NEW_ROOM, funct = OnNewRoom})
+TSIL.CALLBACKS["RUN_NEXT_ROOM_POST_NEW_ROOM"] =
+{callback = ModCallbacks.MC_POST_NEW_ROOM, funct = OnNewRoom}
 
 ---Runs a given function on the next room
 ---@param funct function
