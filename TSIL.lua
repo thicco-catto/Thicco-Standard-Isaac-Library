@@ -82,6 +82,7 @@ function LOCAL_TSIL.Init(FolderName)
         --Tainted Laz
         "Players.TaintedLaz.IsActiveTaintedLaz",
         --Trinkets
+        "Players.Trinkets.AddSmeltedTrinket",
         "Players.Trinkets.SmeltedTrinketMultiplier",
 
         --UTILS
