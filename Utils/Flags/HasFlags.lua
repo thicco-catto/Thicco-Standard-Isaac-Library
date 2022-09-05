@@ -2,7 +2,7 @@
 ---@param flags integer
 ---@param ... integer
 ---@return boolean
-return function (flags, ...)
+function TSIL.Utils.Flags.HasFlags(flags, ...)
     local flagsToCheck = {...}
 
     for _, flag in ipairs(flagsToCheck) do

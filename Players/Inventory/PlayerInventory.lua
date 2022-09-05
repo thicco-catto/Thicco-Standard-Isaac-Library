@@ -1,5 +1,6 @@
-TSIL.Utils.SaveManager.AddVariableToReset(TSIL.MOD, "PlayerInventories", {}, TSIL.Enums.VariableResetTime.RESET_RUN)
-local PlayerInventories = TSIL.Utils.SaveManager.GetVariabeToResetValue(TSIL.MOD, "PlayerInventories")
+--TSIL.Utils.SaveManager.AddVariableToReset(TSIL.MOD, "PlayerInventories", {}, TSIL.Enums.VariableResetTime.RESET_RUN)
+--local PlayerInventories = TSIL.Utils.SaveManager.GetVariabeToResetValue(TSIL.MOD, "PlayerInventories")
+local PlayerInventories = {}
 
 local PlayerCollectibleAddedCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.PlayerCallbacks.PlayerCollectibleAdded")
 local PlayerCollectibleRemovedCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.PlayerCallbacks.PlayerCollectibleRemoved")
@@ -62,6 +63,7 @@ local function CheckGulpedTrinkets(player, playerState)
             local trinketId = trinket.ID
 
             local pastGulpedNum = playerState.GulpedTrinkets[trinketId] or 0
+            ---@cast trinketId TrinketType
             local actualGulpedNum = TSIL.Players.GetSmeltedTrinketMultiplier(player, trinketId)
 
             if actualGulpedNum > pastGulpedNum then
@@ -127,7 +129,7 @@ TSIL.MOD:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, OnPeffectUpdate)
 ---@param player EntityPlayer
 ---@param inventoryTypeFilter? InventoryType
 ---@return table
-return function(player, inventoryTypeFilter)
+function TSIL.Players.GetPlayerInventory(player, inventoryTypeFilter)
     local playerIndex = TSIL.Players.GetPlayerIndex(player)
 
     local TablesUtils = TSIL.Utils.Tables

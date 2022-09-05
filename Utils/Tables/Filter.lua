@@ -1,4 +1,4 @@
-return function(toFilter, predicate)
+function TSIL.Utils.Tables.Filter(toFilter, predicate)
     local filtered = {}
 
     for index, value in pairs(toFilter) do

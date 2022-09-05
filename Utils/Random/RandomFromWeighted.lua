@@ -5,7 +5,7 @@
 ---@param rngOrSeed RNG | integer
 ---@param ... {chance : integer, value : any}
 ---@return any
-return function (rngOrSeed, ...)
+function TSIL.Utils.Random.GetRandomElementFromWeightedList(rngOrSeed, ...)
     local rng
 
     if type(rngOrSeed) == "number" then

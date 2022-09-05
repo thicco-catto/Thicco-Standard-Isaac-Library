@@ -1,7 +1,7 @@
 ---Returns a list of all players.
 ---@param ignoreCoopBabies? boolean @default: true
 ---@return EntityPlayer[]
-return function (ignoreCoopBabies)
+function TSIL.Players.GetPlayers(ignoreCoopBabies)
     if ignoreCoopBabies == nil then
         ignoreCoopBabies = true
     end

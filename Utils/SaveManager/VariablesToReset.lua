@@ -1,3 +1,0 @@
-local VariablesToReset = {}
-
-return VariablesToReset

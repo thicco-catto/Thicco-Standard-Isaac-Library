@@ -18,7 +18,7 @@ function LOCAL_TSIL.Init(FolderName)
         end
 
         for _, TSILcallback in ipairs(TSIL.CUSTOM_CALLBACKS) do
-            TSIL.RemoveCustomCallback(TSILcallback.callback, TSILcallback.funct)
+            TSIL.RemoveCustomCallback(TSIL.MOD, TSILcallback.callback, TSILcallback.funct)
         end
 
         isOverwritting = true
@@ -35,95 +35,112 @@ function LOCAL_TSIL.Init(FolderName)
         TSIL.VERSION_PERSISTENT_DATA = {}
     end
 
-    --#region Custom Enums
-    TSIL.Enums = {
-        --For TSIL itself
-        CustomCallback = require(TSIL.LOCAL_FOLDER .. ".Enums.CustomCallback"),
-        InventoryType = require(TSIL.LOCAL_FOLDER .. ".Enums.InventoryType"),
-        VariableResetTime = require(TSIL.LOCAL_FOLDER .. ".Enums.VariableResetTime"),
-        --For ingame stuff
-        SlotVariant = require(TSIL.LOCAL_FOLDER .. ".Enums.SlotVariant"),
+    local scripts = {
+        --COLLECTIBLES
+        "Collectibles.GetCollectibles",
+        "Collectibles.GetCollectiblesByQuality",
+
+        --CUSTOM CALLBACKS
+        "CustomCallbacks.AddCustomCallback",
+        "CustomCallbacks.RemoveCustomCallback",
+        --Grid Entity Callbacks
+        "CustomCallbacks.GridEntityCallbacks.GridUpdateCallback",
+        --Player Callbacks
+        "CustomCallbacks.PlayerCallbacks.PlayerCollectibleAdded",
+        "CustomCallbacks.PlayerCallbacks.PlayerCollectibleRemoved",
+        "CustomCallbacks.PlayerCallbacks.PlayerGulpedTrinketAdded",
+        "CustomCallbacks.PlayerCallbacks.PlayerGulpedTrinketRemoved",
+        --Slot Callbacks
+        "CustomCallbacks.SlotCallbacks.SlotInitCallback",
+        "CustomCallbacks.SlotCallbacks.SlotPrizeCallback",
+        "CustomCallbacks.SlotCallbacks.SlotUpdateCallback",
+
+        --ENUMS
+        "Enums.CustomCallback",
+        "Enums.InventoryType",
+        "Enums.SlotVariant",
+        "Enums.VariablePersistenceMode",
+
+        --GRID ENTITIES
+        "GridEntities.GetGridEntities",
+
+        --PLAYERS
+        --Get Players
+        "Players.GetPlayers.GetClosestPlayers",
+        "Players.GetPlayers.GetPlayers",
+        "Players.GetPlayers.GetPlayersByCollectible",
+        "Players.GetPlayers.GetPlayersByTrinket",
+        --Players Inventory
+        "Players.Inventory.AnyPlayerHasItem",
+        "Players.Inventory.AnyPlayerHasTrinket",
+        --"Players.Inventory.PlayerInventory",
+        --Player Index
+        "Players.PlayerIndex.PlayerByIndex",
+        "Players.PlayerIndex.PlayerIndex",
+        --Tainted Laz
+        "Players.TaintedLaz.IsActiveTaintedLaz",
+        --Trinkets
+        "Players.Trinkets.SmeltedTrinketMultiplier",
+
+        --UTILS
+        --Flags
+        "Utils.Flags.AddFlags",
+        "Utils.Flags.HasFlags",
+        "Utils.Flags.RemoveFlags",
+        --Functions
+        "Utils.Functions.RunNextLevel",
+        "Utils.Functions.RunNextRoom",
+        "Utils.Functions.Scheduler",
+        --Random
+        "Utils.Random.RandomFloat",
+        "Utils.Random.RandomFromTable",
+        "Utils.Random.RandomFromWeighted",
+        "Utils.Random.RandomInt",
+        --Tables
+        "Utils.Tables.Copy",
+        "Utils.Tables.Count",
+        "Utils.Tables.Filter",
+        "Utils.Tables.FindFirst",
+        "Utils.Tables.ForEach",
+        "Utils.Tables.IsInTable"
     }
-    --#endregion
 
-    --#region Custom Callbacks
-    TSIL.AddCustomCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.AddCustomCallback")
-    TSIL.RemoveCustomCallback = require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.RemoveCustomCallback")
-
-    require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.SlotCallbacks.SlotInitCallback")
-    require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.SlotCallbacks.SlotUpdateCallback")
-    require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.SlotCallbacks.SlotPrizeCallback")
-
-    require(TSIL.LOCAL_FOLDER .. ".CustomCallbacks.GridEntityCallbacks.GridUpdateCallback")
-    --#endregion
-
-    --#region Utils
-    TSIL.Utils = {
-        Tables = {
-            Copy = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Copy"),
-            Count = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Count"),
-            Filter = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.Filter"),
-            FindFirst = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.FindFirst"),
-            ForEach = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.ForEach"),
-            IsInTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Tables.IsInTable"),
-        },
-
-        Random = {
-            GetRandomElementsFromTable = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromTable"),
-            GetRandomIntegerInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomInt"),
-            GetRandomFloatInRange = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFloat"),
-            GetRandomElementFromWeightedList = require(TSIL.LOCAL_FOLDER .. ".Utils.Random.RandomFromWeighted"),
-        },
-
-        Functions = {
-            RunInFrames = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.Scheduler"),
-            RunNextRoom = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextRoom"),
-            RunNextLevel = require(TSIL.LOCAL_FOLDER .. ".Utils.Functions.RunNextLevel")
-        },
-
-        Flags = {
-            AddFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.AddFlags"),
-            HasFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.HasFlags"),
-            RemoveFlags = require(TSIL.LOCAL_FOLDER .. ".Utils.Flags.RemoveFlags"),
-        },
-
-        SaveManager = {
-            AddVariableToReset = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.AddVariableToReset"),
-            GetVariabeToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.GetVariableToReset"),
-            SetVariableToResetValue = require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.SetVariableToReset"),
-        },
+    local TSILmodules = {
+        "Collectibles",
+        "Enums",
+        "GridEntities",
+        "Players",
+        ["Utils"] = {
+            "Flags",
+            "Functions",
+            "Random",
+            "Tables"
+        }
     }
 
-    --This takes care of resetting all the variables in the save manager
-    require(TSIL.LOCAL_FOLDER .. ".Utils.SaveManager.VariableResetter")
+    for key, value in pairs(TSILmodules) do
+        if type(value) == "table" then
+            if not TSIL[key] then
+                TSIL[key] = {}
+            end
 
-    --#endregion
+            for _, TSILmodule in ipairs(value) do
+                if not TSIL[key][TSILmodule] then
+                    TSIL[key][TSILmodule] = {}
+                end
+            end
+        else
+            TSIL[value] = {}
+        end
+    end
 
-    --#region Collectibles
-    TSIL.Collectibles = {
-        GetCollectibles = require(TSIL.LOCAL_FOLDER .. ".Collectibles.GetCollectibles"),
-        GetCollectiblesByQuality = require(TSIL.LOCAL_FOLDER .. ".Collectibles.GetCollectiblesByQuality")
-    }
-    --#endregion
+    for _, script in ipairs(scripts) do
+        local hasError = pcall(function ()
+            require(TSIL.LOCAL_FOLDER .. "." ..  script)
+        end)
 
-    --#region Players
-    TSIL.Players = {
-        GetPlayers = require(TSIL.LOCAL_FOLDER .. ".Players.GetPlayers.GetPlayers"),
-        GetPlayerIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerIndex"),
-        GetPlayerByIndex = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerIndex.PlayerByIndex"),
-        GetSmeltedTrinketMultiplier = require(TSIL.LOCAL_FOLDER .. ".Players.SmeltedTrinketMultiplier"),
-        GetPlayerInventory = require(TSIL.LOCAL_FOLDER .. ".Players.PlayerInventory"),
-        DoesAnyPlayerHasItem = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasItem"),
-        DoesAnyPlayerHasTrinket = require(TSIL.LOCAL_FOLDER .. ".Players.AnyPlayerHasTrinket"),
-        IsActiveTaintedLazForm = require(TSIL.LOCAL_FOLDER .. ".Players.TaintedLaz.IsActiveBirthright"),
-    }
-    --#endregion
-
-    --#region Grid Entities
-    TSIL.GridEntities = {
-        GetGridEntities = require(TSIL.LOCAL_FOLDER .. ".GridEntities.GetGridEntities"),
-    }
-    --#endregion
+        print(hasError)
+    end
 
     print("TSIL (" .. TSIL.VERSION .. ") has been properly initialized.")
 end

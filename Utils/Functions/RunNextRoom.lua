@@ -12,7 +12,7 @@ table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_NEW_ROOM, funct = 
 ---Runs a given function on the next room
 ---@param funct function
 ---@param ... any
-return function (funct, ...)
+function TSIL.Utils.Functions.RunNextRoom(funct, ...)
     local args = {...}
 
     table.insert(FunctionsToRun, {funct = funct, params = args})

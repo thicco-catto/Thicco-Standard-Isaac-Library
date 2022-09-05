@@ -3,7 +3,7 @@
 ---@param player EntityPlayer
 ---@param trinket TrinketType
 ---@return integer
-return function(player, trinket)
+function TSIL.Players.GetSmeltedTrinketMultiplier(player, trinket)
     local totalMultiplier = player:GetTrinketMultiplier(trinket)
     local playerHasMomsBox = player:HasCollectible(CollectibleType.COLLECTIBLE_MOMS_BOX)
 

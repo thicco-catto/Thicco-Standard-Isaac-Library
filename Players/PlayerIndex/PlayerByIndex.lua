@@ -1,7 +1,7 @@
 ---Returns a player given its index.
 ---@param playerIndex integer
 ---@return EntityPlayer | nil
-return function (playerIndex)
+function TSIL.Players.GetPlayerByIndex(playerIndex)
     local players = TSIL.Players.GetPlayers()
 
     return TSIL.Utils.Tables.FindFirst(players, function (_, player)

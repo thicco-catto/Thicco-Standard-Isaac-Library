@@ -1,4 +1,4 @@
-return function(toFind, predicate)
+function TSIL.Utils.Tables.FindFirst(toFind, predicate)
     for index, value in pairs(toFind) do
         if predicate(index, value) then
             return value

@@ -4,7 +4,7 @@
 ---@param max integer
 ---@param min? integer @default: 0
 ---@return integer
-return function (rngOrSeed, max, min)
+function TSIL.Utils.Random.GetRandomFloatInRange(rngOrSeed, max, min)
     local rng
 
     if type(rngOrSeed) == "number" then

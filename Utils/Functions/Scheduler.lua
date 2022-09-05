@@ -19,7 +19,7 @@ table.insert(TSIL.CALLBACKS, {callback = ModCallbacks.MC_POST_UPDATE, funct = On
 ---@param funct function
 ---@param frames integer
 ---@param ... any
-return function (funct, frames, ...)
+function TSIL.Utils.Functions.RunInFrames(funct, frames, ...)
     local args = {...}
     table.insert(ScheduledFunctions, {funct = funct, frames = frames, params = args})
 end

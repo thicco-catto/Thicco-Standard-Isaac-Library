@@ -2,7 +2,7 @@
 ---@param flags integer
 ---@param ... integer
 ---@return integer
-return function (flags, ...)
+function TSIL.Utils.Flags.AddFlags(flags, ...)
     local flagsToAdd = {...}
 
     for _, flag in ipairs(flagsToAdd) do

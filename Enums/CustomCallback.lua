@@ -1,5 +1,5 @@
 ---@enum CustomCallback
-return {
+TSIL.Enums.CustomCallback {
     MC_POST_SLOT_INIT = 1,
     MC_POST_SLOT_UPDATE = 2,
     MC_POST_SLOT_PRIZE = 3,

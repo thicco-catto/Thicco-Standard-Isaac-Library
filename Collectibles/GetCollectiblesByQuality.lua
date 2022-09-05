@@ -2,7 +2,7 @@
 ---Use only inside a callback or not all modded items may be loaded.
 ---@param quality integer 0|1|2|3|4
 ---@return CollectibleType[]
-return function (quality)
+function TSIL.Collectibles.GetCollectiblesByQuality(quality)
     local collectibles = TSIL.Collectibles.GetCollectibles()
 
     return TSIL.Utils.Tables.Filter(collectibles, function (collectible)

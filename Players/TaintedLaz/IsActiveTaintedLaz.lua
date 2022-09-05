@@ -2,7 +2,7 @@
 ---If the given player is not tainted lazarus, it'll always return false.
 ---@param player EntityPlayer
 ---@return boolean
-return function (player)
+function TSIL.Players.IsActiveTaintedLazForm(player)
     if player:GetPlayerType() ~= PlayerType.PLAYER_LAZARUS2 and player:GetPlayerType() ~= PlayerType.PLAYER_LAZARUS2_B then return false end
 
     if player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then

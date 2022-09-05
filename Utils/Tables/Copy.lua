@@ -1,4 +1,4 @@
-return function(toCopy)
+function TSIL.Utils.Tables.Copy(toCopy)
     local copy = {}
     for index, value in pairs(toCopy) do
         if type(value) == "table" then

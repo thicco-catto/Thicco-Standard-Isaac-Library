@@ -1,5 +1,5 @@
 ---@enum SlotVariant
-return {
+TSIL.Enums.SlotVariant {
     SLOT_MACHINE = 1,
     SLOT_BLOOD_DONATION_MACHINE = 2,
     SLOT_FORTUNE_TELLING_MACHINE = 3,

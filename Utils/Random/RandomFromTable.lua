@@ -3,7 +3,7 @@
 ---@param toChoose table
 ---@param numberOfElements? integer @default: 1
 ---@return table
-return function (rngOrSeed, toChoose, numberOfElements)
+function TSIL.Utils.Random.GetRandomElementsFromTable(rngOrSeed, toChoose, numberOfElements)
     local rng
 
     if type(rngOrSeed) == "number" then

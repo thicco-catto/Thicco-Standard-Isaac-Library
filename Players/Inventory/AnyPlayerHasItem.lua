@@ -1,7 +1,7 @@
 ---Returns true if at least one player has the given item.
 ---@param collectibleId CollectibleType
 ---@return boolean
-return function (collectibleId)
+function TSIL.Players.DoesAnyPlayerHasItem(collectibleId)
     local players = TSIL.Players.GetPlayers()
 
     local numPlayersWithItem = TSIL.Utils.Tables.Count(players, function (_, player)

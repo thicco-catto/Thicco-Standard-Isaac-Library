@@ -1,5 +1,5 @@
----@enum VariableResetTime
-return {
+---@enum VariablePersistenceMode
+TSIL.Enums.VariablePersistenceMode {
     RESET_NONE = 1,
     RESET_ROOM = 2,
     RESET_LEVEL = 3,

@@ -3,7 +3,7 @@
 ---@param center Vector
 ---@param numberOfPlayers? integer @default : 1
 ---@return EntityPlayer[]
-return function (center, numberOfPlayers)
+function TSIL.Players.GetClosestPlayers(center, numberOfPlayers)
     if numberOfPlayers == nil then
         numberOfPlayers = 1
     end

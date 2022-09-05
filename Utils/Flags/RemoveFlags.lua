@@ -2,11 +2,11 @@
 ---@param flags integer
 ---@param ... integer
 ---@return integer
-return function (flags, ...)
+function TSIL.Utils.Flags.RemoveFlags(flags, ...)
     local flagsToRemove = {...}
 
     for _, flag in ipairs(flagsToRemove) do
-        flags = flags & !flag
+        flags = flags & ~flag
     end
 
     return flags
