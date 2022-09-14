@@ -5,7 +5,6 @@
 ---@param value any
 ---@param persistenceMode VariablePersistenceMode
 function TSIL.SaveManager.AddPersistentVariable(mod, variableName, value, persistenceMode)
-    ---@type table[]
     local PersistentData = TSIL.VERSION_PERSISTENT_DATA.PersistentData
 
     local tables = TSIL.Utils.Tables
@@ -23,7 +22,21 @@ function TSIL.SaveManager.AddPersistentVariable(mod, variableName, value, persis
     end
 
     local modVariables = modPersistentData.variables
+
     local foundVariable = tables.FindFirst(modVariables, function (_, modVariable)
         return modVariable.name == variableName
     end)
+
+    if foundVariable ~= nil then
+        --The variable already exists
+        return
+    end
+
+    local newVariable = {
+        name = variableName,
+        default = value,
+        value = value,
+        persistenceMode = persistenceMode
+    }
+    table.insert(modVariables, newVariable)
 end

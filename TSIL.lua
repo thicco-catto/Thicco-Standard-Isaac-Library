@@ -35,6 +35,7 @@ function LOCAL_TSIL.Init(FolderName)
     if not TSIL.VERSION_PERSISTENT_DATA then
         TSIL.VERSION_PERSISTENT_DATA = {}
         TSIL.VERSION_PERSISTENT_DATA.CustomCallbacksList = {}
+        ---@type ModPersistentData[]
         TSIL.VERSION_PERSISTENT_DATA.PersistentData = {}
     end
 
