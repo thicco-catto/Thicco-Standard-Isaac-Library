@@ -35,6 +35,7 @@ function LOCAL_TSIL.Init(FolderName)
     if not TSIL.VERSION_PERSISTENT_DATA then
         TSIL.VERSION_PERSISTENT_DATA = {}
         TSIL.VERSION_PERSISTENT_DATA.CustomCallbacksList = {}
+        TSIL.VERSION_PERSISTENT_DATA.PersistentData = {}
     end
 
     local scripts = {
@@ -85,6 +86,8 @@ function LOCAL_TSIL.Init(FolderName)
         "Players.Trinkets.AddSmeltedTrinket",
         "Players.Trinkets.SmeltedTrinketMultiplier",
 
+        --SAVE MANAGER
+
         --UTILS
         --Flags
         "Utils.Flags.AddFlags",
@@ -113,6 +116,7 @@ function LOCAL_TSIL.Init(FolderName)
         "Enums",
         "GridEntities",
         "Players",
+        "SaveManager",
         ["Utils"] = {
             "Flags",
             "Functions",
